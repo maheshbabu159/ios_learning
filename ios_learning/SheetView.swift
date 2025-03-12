@@ -8,14 +8,23 @@ import SwiftUI
 
 struct SheetView: View {
     @Environment(\.dismiss) var dismiss
-    var item = "Passed Data"
+    var category = "Category"
+    var subCategory = "Passed Data"
 
     var body: some View {
         VStack {
-            if item == "API Test" {
-                APITestView()
+            if category == "Interview Questions" {
+                if subCategory == "API Test" {
+                    APITestView()
+                } else {
+                    APITestView()
+                }
             } else {
-                APITestView()
+                if subCategory == "Queues" {
+                    QueuesView()
+                } else {
+                    QueuesView()
+                }
             }
             Spacer()
             Button("Dismiss") {

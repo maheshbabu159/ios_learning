@@ -7,23 +7,35 @@
 import SwiftUI
 
 struct DetailsView: View {
-    var item = "Passed Data"
+    var category = "Passed Data"
     var interviewQuestions = ["API Test"]
+    var dataStructures = ["Queues"]
     @State private var showingSheet = false
-    @State var sheetViewName = ""
+    @State var subCategory = ""
     var body: some View {
         VStack {
-            if item == "Interview Questions" {
+            if category == "Interview Questions" {
                 List(interviewQuestions, id: \.self) { item in
                     Button(action: {
-                        sheetViewName = item
+                        subCategory = item
                         showingSheet.toggle()
                     }, label: {
                         Text(item)
                     })
                 }
                 .navigationTitle("Interview Questions")
-            } else {
+            }
+            else if category == "Data Structures" {
+                List(dataStructures, id: \.self) { item in
+                    Button(action: {
+                        subCategory = item
+                        showingSheet.toggle()
+                    }, label: {
+                        Text(item)
+                    })
+                }
+                .navigationTitle("Interview Questions")
+            }else {
                 List(interviewQuestions, id: \.self) { item in
                     Text(item)
                 }
@@ -31,7 +43,7 @@ struct DetailsView: View {
             }
         }
         .sheet(isPresented: $showingSheet) {
-            SheetView(item: sheetViewName)
+            SheetView(category:category, subCategory: subCategory)
         }
     }
 }
