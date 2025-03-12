@@ -8,16 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    var categories = ["Data Structures", "Swift", "SwiftUI", "Interview Questions"]
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            NavigationStack {
+                List(categories, id: \.self){ item in
+                    NavigationLink(destination: DetailsView(item: item)) {
+                        ListRowView(item: item)
+                    }
+                }
+                .navigationTitle("iOS")
+            }
         }
-        .padding()
     }
 }
+struct ListRowView: View {
+    var item = "Array item"
+    var body: some View {
+        HStack{
+            Image(systemName: "leaf")
+                .imageScale(.large)
+            Text(item)
+        }
+    }
+}
+    
 
 #Preview {
     ContentView()
